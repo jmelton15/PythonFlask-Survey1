@@ -15,12 +15,15 @@ page_number = 0
 
 
 @app.route('/', methods=["GET","POST"])
+#@app.route('/survey_page', methods=["GET","POST"])
 def survey_page():
     """Landing Page for the surveys
     """
+    #session.clear()
     survey_title = satisfaction_survey.title
     instructions = satisfaction_survey.instructions
     session["p_num"] = page_number
+    session["responses"] = responses
     return render_template("main.html",survey_title=survey_title,instructions=instructions)
 
 
@@ -33,19 +36,19 @@ def show_questions_page(page):
         or render a new form based on if the session was a POST or GET request. This function will also
         make sure a choice is selected and will not allow a user to skip to different questions before completing
         the survey questions]
-
     """
-   
+    responses = session.get("responses")
     if len(responses) < page:
         flash("You Must First Answer The Question On This Page Before Continuing", "error")
-        return redirect(f"/questions/{len(responses)}")
+        return redirect(f'/questions/{len(responses)}')
     if page > len(satisfaction_survey.questions) -1:
         return redirect("/thanks")
     if request.method == "POST":
         choice = request.form.get("flexRadioDefault")
         if choice:
-            if len(responses) <= len(satisfaction_survey.questions):
+            if len(responses) < len(satisfaction_survey.questions):
                 responses.append(choice)
+                session["responses"] = responses
             return redirect("/answers")
         else:
             flash("Please Select An Answer Before Pressing Next", "error")
@@ -69,8 +72,9 @@ def go_next_question():
 def show_thanks():
     """Thank you Page for completing survey
     """
+    responses = session.get("responses")
     flash("Thank You For Taking The Time To Complete Our Survey!", 'success')
     return render_template("thanks.html",responses=responses)
-    
+
 
    

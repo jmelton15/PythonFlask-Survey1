@@ -17,7 +17,8 @@ page_number = 0
 @app.route('/', methods=["GET","POST"])
 #@app.route('/survey_page', methods=["GET","POST"])
 def survey_page():
-    """Landing Page for the surveys
+    """Landing Page for the surveys. Uses session data for page number and responses.
+    Responses and page_number should reset back to their initial values when visiting home page
     """
     #session.clear()
     survey_title = satisfaction_survey.title

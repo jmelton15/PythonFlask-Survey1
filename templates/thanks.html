@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %} Thanks {% endblock %}
+
+{% block content %}
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category,message in messages %}
+            <h1 class="{{category}}">{{message}}</h1>
+        {% endfor %}
+    {% endif %}
+    {% endwith %}
+    {% if responses %}
+        <h4>Your Responses Were</h4>
+        <ul>
+        {% for response in responses %}
+            <li>{{response}}</li>
+        {% endfor %}
+        </ul>
+    {% endif %}
+{% endblock %}

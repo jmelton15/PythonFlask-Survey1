@@ -1,0 +1,21 @@
+.nav-link {
+    color:white !important;
+}
+.navbar-brand {
+    color:white !important;
+}
+#question-header {
+    font-size: 50px;
+}
+.form-check-input:hover {
+    border: 1px solid blue
+}
+.success {
+    background-color: lightgreen;
+    opacity: .5;
+}
+.error {
+    background-color: red;
+    opacity: .5;
+    color:black;
+}

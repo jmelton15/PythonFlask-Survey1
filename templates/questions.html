@@ -1,0 +1,44 @@
+{% extends 'q_template.html' %}
+
+{% block title %} Survey Questions {% endblock %}
+
+{% block content %}
+
+<div class="container-fluid d-flex justify-content-center align-items-center flex-column">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category,message in messages %}
+            <h1 class="{{category}}">{{message}}</h1>
+        {% endfor %}
+    {% endif %}
+    {% endwith %}
+    {% if question %}
+    <form id="questions-form" name="q-form" method="POST">
+        <div class="d-flex justify-content-center align-items-center flex-column">
+            <h4>{{question}}</h4>
+            <p >Select Your Answer<p>
+        </div>
+        <div class="d-flex flex-row justify-content-center align-items-end ">
+            <div class="form-check form-check-inline mt-3">
+                <input class="form-check-input" value="{{choices[0]}}" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                <label class="form-check-label" for="flexRadioDefault1">
+                    {{choices[0]}}
+                </label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" value="{{choices[1]}}" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
+                <label class="form-check-label" for="flexRadioDefault2">
+                    {{choices[1]}}
+                </label>
+            </div>
+        </div>
+        <div class="d-flex justify-content-center align-items-center">
+            <button class="btn btn-success mt-5" id="next">Next Question</button>
+        </div>
+    </form>
+    {% endif %}
+
+</div>
+
+{% endblock %}
+

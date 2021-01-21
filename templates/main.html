@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %} Survey Question {% endblock %}
+
+{% block content %}
+
+<div class="container-fluid d-flex justify-content-center align-items-center flex-column">
+        {% if survey_title %}
+            <h1>Welcome To The {{survey_title}}</h1>
+        {% endif %}
+        {% if survey_title and instructions %}
+            <h3>{{instructions}}</h3>
+        {% endif %}
+        <br> 
+</div>
+<div class="container-fluid d-flex justify-content-center align-items-center flex-column">
+    <form id="start-form" name="start" action="/questions/0">
+
+        <button class="btn btn-primary btn-lg" id="start-button" name="start-btn">Start Survey</button>
+    </form>
+</div>
+
+
+
+{% endblock %}
